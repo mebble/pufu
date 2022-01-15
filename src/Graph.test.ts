@@ -10,4 +10,13 @@ describe('render', () => {
         expect(graph).toBeInTheDocument();
         expect(graph).toHaveAttribute('aria-label', 'The present value and future value graph');
     });
+
+    test.todo('should have a height that is 3/4 of the width in pixels');
+    test.todo('should divide user space one-to-one with the width and height');
+});
+
+describe('dragging', () => {
+    test.todo('should drag the present value node using the mouse');
+    test.todo('should drag the future value 1 node using the mouse');
+    test.todo('should drag the future value 2 node using the mouse');
 });
