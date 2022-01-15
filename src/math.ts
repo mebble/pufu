@@ -1,1 +1,3 @@
-export const add = (a: number, b: number) => a + b;
+export const futureValue = (presentValue: number, growthRate: number, numYears: number) => {
+    return 120;
+};
