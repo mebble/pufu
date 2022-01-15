@@ -5,6 +5,9 @@ export const futureValue = (presentValue: number, growthPercentage: number, numY
     if (numYears < 0) {
         throw new Error('Number of years should not be negative');
     }
+    if (!Number.isInteger(numYears)) {
+        throw new Error('Number of years should be an integer');
+    }
     const growthRate = growthPercentage / 100;
     let result = presentValue;
     for (let i = 0; i < numYears; i++) {

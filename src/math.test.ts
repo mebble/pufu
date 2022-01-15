@@ -17,6 +17,14 @@ describe('futureValue', () => {
         }).toThrowError('Number of years should not be negative');
     });
 
+    test('throws err when number of years is not an integer', () => {
+        const numYears = 1.23;
+
+        expect(() => {
+            futureValue(100, 20, numYears);
+        }).toThrowError('Number of years should be an integer');
+    });
+
     describe('positive growth rate', () => {
         test('returns the future value one year from now', () => {
             const presentValue = 100;
