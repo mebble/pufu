@@ -33,5 +33,13 @@ describe('futureValue', () => {
             expect(futureValue(presentValue, -20, 4)).toBe(40.96);
             expect(futureValue(presentValue, -24, 3)).toBe(43.9);
         });
+
+        test('returns the future value contrained at zero', () => {
+            const presentValue = 100;
+
+            expect(futureValue(presentValue, -120, 1)).toBe(0);
+            expect(futureValue(presentValue, -120, 2)).toBe(0);
+            expect(futureValue(presentValue, -120, 3)).toBe(0);
+        });
     });
 });
