@@ -1,6 +1,22 @@
 import { futureValue } from './math';
 
 describe('futureValue', () => {
+    test('throws err when present value is negative', () => {
+        const presentValue = -10;
+
+        expect(() => {
+            futureValue(presentValue, 20, 1);
+        }).toThrowError('Present value should not be negative');
+    });
+
+    test('throws err when number of years is negative', () => {
+        const numYears = -1;
+
+        expect(() => {
+            futureValue(100, 20, numYears);
+        }).toThrowError('Number of years should not be negative');
+    });
+
     describe('positive growth rate', () => {
         test('returns the future value one year from now', () => {
             const presentValue = 100;
