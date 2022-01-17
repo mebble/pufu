@@ -48,3 +48,22 @@ export function draggable(node: HTMLElement) {
 		}
 	};
 }
+
+type Point = {
+    x: number;
+    y: number;
+};
+
+export function controlPoints(p1: Point, p2: Point): [Point, Point] {
+    const c1 = {
+        x: roundedAvg(p1.x, p2.x),
+        y: p1.y,
+    };
+    const c2 = {
+        x: roundedAvg(c1.x, p2.x),
+        y: roundedAvg(c1.y, p2.y),
+    };
+    return [c1, c2];
+}
+
+const roundedAvg = (a: number, b: number) => Math.round((a + b) / 2);
