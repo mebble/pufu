@@ -70,9 +70,8 @@ export function mapToCanvas(canvasWidth: number, canvasHeight: number, maxValue:
     const x = asset.time === 'present'
         ? padding
         : canvasWidth - padding;
-
     return {
         x,
-        y: canvasHeight - padding
+        y: (-1/5) * asset.value + (canvasHeight - padding)
     };
 }

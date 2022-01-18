@@ -29,6 +29,14 @@ describe('mapToCanvas', () => {
                 y: height - padding
             });
         });
+
+        test('should map the max value to the top of the canvas', () => {
+            const presentAsset: Asset = { time: 'present', value: 300 };
+            expect(mapToCanvas(width, height, presentAsset.value, presentAsset)).toEqual({
+                x: padding,
+                y: padding
+            });
+        });
     });
 
     describe('future asset', () => {
@@ -37,6 +45,14 @@ describe('mapToCanvas', () => {
             expect(mapToCanvas(width, height, 707, futureAsset)).toEqual({
                 x: width - padding,
                 y: height - padding
+            });
+        });
+
+        test('should map the max value to the top of the canvas', () => {
+            const futureAsset: Asset = { time: 'future', value: 300 };
+            expect(mapToCanvas(width, height, futureAsset.value, futureAsset)).toEqual({
+                x: width - padding,
+                y: padding
             });
         });
     });
