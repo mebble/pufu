@@ -1,3 +1,5 @@
+import type { Asset, Point } from './types';
+
 /**
  * Taken from https://svelte.dev/examples#actions
  */
@@ -49,11 +51,6 @@ export function draggable(node: HTMLElement) {
 	};
 }
 
-type Point = {
-    x: number;
-    y: number;
-};
-
 export function controlPoints(p1: Point, p2: Point): [Point, Point] {
     const c1 = {
         x: roundedAvg(p1.x, p2.x),
@@ -67,3 +64,15 @@ export function controlPoints(p1: Point, p2: Point): [Point, Point] {
 }
 
 const roundedAvg = (a: number, b: number) => Math.round((a + b) / 2);
+
+export function mapToCanvas(canvasWidth: number, canvasHeight: number, maxValue: number, asset: Asset): Point {
+    const padding = 20;
+    const x = asset.time === 'present'
+        ? padding
+        : canvasWidth - padding;
+
+    return {
+        x,
+        y: canvasHeight - padding
+    };
+}

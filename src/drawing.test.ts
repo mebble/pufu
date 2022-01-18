@@ -1,4 +1,5 @@
-import { controlPoints } from './drawing';
+import type { Asset } from './types';
+import { controlPoints, mapToCanvas } from './drawing';
 
 describe('controlPoints', () => {
     test('should return control points when resultant numbers are wholesome', () => {
@@ -13,5 +14,30 @@ describe('controlPoints', () => {
         const p2 = { x: 398, y: 99 };
         const expected = [ { x: 251, y: 198 }, { x: 325, y: 149 } ];
         expect(controlPoints(p1, p2)).toEqual(expected);
+    });
+});
+
+describe('mapToCanvas', () => {
+    const width = 100, height = 100;
+    const padding = 20;
+
+    describe('present asset', () => {
+        test('should map a zero value to the bottom of the canvas', () => {
+            const presentAsset: Asset = { time: 'present', value: 0 };
+            expect(mapToCanvas(width, height, 909, presentAsset)).toEqual({
+                x: padding,
+                y: height - padding
+            });
+        });
+    });
+
+    describe('future asset', () => {
+        test('should map a zero value to the bottom of the canvas', () => {
+            const futureAsset: Asset = { time: 'future', value: 0 };
+            expect(mapToCanvas(width, height, 707, futureAsset)).toEqual({
+                x: width - padding,
+                y: height - padding
+            });
+        });
     });
 });
