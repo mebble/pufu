@@ -64,9 +64,9 @@ export function controlPoints(p1: Point, p2: Point): [Point, Point] {
 }
 
 const roundedAvg = (a: number, b: number) => Math.round((a + b) / 2);
+const padding = 20;
 
 export function mapToCanvas(canvasWidth: number, canvasHeight: number, maxValue: number, asset: Asset): Point {
-    const padding = 20;
     const x = asset.time === 'present'
         ? padding
         : canvasWidth - padding;
@@ -79,3 +79,10 @@ export function mapToCanvas(canvasWidth: number, canvasHeight: number, maxValue:
 const linearMapping = (padding: number, height: number, max: number, x: number) => {
     return Math.round(((2 * padding - height) / max) * x + height - padding);
 };
+
+export function mapToAssetValue(canvasWidth: number, canvasHeight: number, maxValue: number, yCoord: number): number {
+    return roundTwoPlaces(Math.abs((maxValue / (2 * padding - canvasHeight)) * (yCoord + padding - canvasHeight)));
+}
+
+// src: https://stackoverflow.com/a/11832950
+const roundTwoPlaces = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100;

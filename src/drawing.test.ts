@@ -1,5 +1,5 @@
 import type { Asset } from './types';
-import { controlPoints, mapToCanvas } from './drawing';
+import { controlPoints, mapToAssetValue, mapToCanvas } from './drawing';
 
 describe('controlPoints', () => {
     test('should return control points when resultant numbers are wholesome', () => {
@@ -38,7 +38,7 @@ describe('mapToCanvas', () => {
             });
         });
 
-        test('should round the mapped value if it is fractional', () => {
+        test('should round the mapped value to an integer if it is fractional', () => {
             const presentAsset: Asset = { time: 'present', value: 300 };
             const max = presentAsset.value + 23;
             expect(mapToCanvas(width, height, max, presentAsset)).toEqual({
@@ -65,7 +65,7 @@ describe('mapToCanvas', () => {
             });
         });
 
-        test('should round the mapped value if it is fractional', () => {
+        test('should round the mapped value to an integer if it is fractional', () => {
             const futureAsset: Asset = { time: 'future', value: 300 };
             const max = futureAsset.value + 37;
             expect(mapToCanvas(width, height, max, futureAsset)).toEqual({
@@ -74,4 +74,26 @@ describe('mapToCanvas', () => {
             });
         });
     });
+});
+
+describe('mapToAssetValue', () => {
+    const width = 100, height = 100;
+    const padding = 20;
+
+    test('should map bottom of the canvas to zero', () => {
+        const yCoord = height - padding;
+        expect(mapToAssetValue(width, height, 987, yCoord)).toBe(0);
+    });
+
+    test('should map top of the canvas to the max value', () => {
+        const yCoord = padding;
+        const max = 900;
+        expect(mapToAssetValue(width, height, max, yCoord)).toBe(max);
+    });
+
+    test('should round the mapped value to 2 decimal places if it is fractional', () => {
+        const yCoord = padding + 31;
+        const max = 917;
+        expect(mapToAssetValue(width, height, max, yCoord)).toBe(443.22);
+    })
 });
