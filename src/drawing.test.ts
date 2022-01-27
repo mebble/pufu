@@ -37,6 +37,15 @@ describe('mapToCanvas', () => {
                 y: padding
             });
         });
+
+        test('should round the mapped value if it is fractional', () => {
+            const presentAsset: Asset = { time: 'present', value: 300 };
+            const max = presentAsset.value + 23;
+            expect(mapToCanvas(width, height, max, presentAsset)).toEqual({
+                x: padding,
+                y: 24
+            });
+        });
     });
 
     describe('future asset', () => {
@@ -53,6 +62,15 @@ describe('mapToCanvas', () => {
             expect(mapToCanvas(width, height, futureAsset.value, futureAsset)).toEqual({
                 x: width - padding,
                 y: padding
+            });
+        });
+
+        test('should round the mapped value if it is fractional', () => {
+            const futureAsset: Asset = { time: 'future', value: 300 };
+            const max = futureAsset.value + 37;
+            expect(mapToCanvas(width, height, max, futureAsset)).toEqual({
+                x: width - padding,
+                y: 27
             });
         });
     });

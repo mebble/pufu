@@ -72,6 +72,10 @@ export function mapToCanvas(canvasWidth: number, canvasHeight: number, maxValue:
         : canvasWidth - padding;
     return {
         x,
-        y: (-1/5) * asset.value + (canvasHeight - padding)
+        y: linearMapping(padding, canvasHeight, maxValue, asset.value)
     };
 }
+
+const linearMapping = (padding: number, height: number, max: number, x: number) => {
+    return Math.round(((2 * padding - height) / max) * x + height - padding);
+};
